@@ -18,7 +18,8 @@
       fitParent: false,
       strokeText: false,
       renderHDPI: true,
-      textDecoration: 'none'
+      textDecoration: 'none',
+      withExample: true
     };
 
     var opts = {};
@@ -130,7 +131,7 @@
 
     function adjustFontSize(size) {
       setFont(size);
-      lineHeight = size;
+      lineHeight = size * opts.lineHeight;
       wrap();
     }
 
