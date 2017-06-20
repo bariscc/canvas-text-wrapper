@@ -75,6 +75,8 @@
     var textPos = {x: 0, y: 0};
     var lineHeight = 0;
     var fontParts;
+    var example_i = -1;
+    var examplePos = {x: 0, y: 0};
 
     setFont(fontSize);
     setLineHeight();
@@ -256,9 +258,22 @@
     }
 
     function drawText() {
+      var max_example_width = 0;
+      example_i = lines.indexOf('\u0000B7 ');
       for (var i = 0; i < lines.length; i++) {
         textPos.y = parseInt(textPos.y) + lineHeight;
-        context.fillText(lines[i], textPos.x, textPos.y);
+        if(example_i == -1) {
+          context.fillText(lines[i], textPos.x, textPos.y);
+        } else {
+          if(i < example_i) {
+            context.fillText(lines[i], textPos.x, textPos.y);
+          } else {
+            max_example_width = context.measureText(lines[i]).width > max_example_width? context.measureText(lines[i]).width : max_example_width;
+            examplePos.x = EL_WIDTH / 2 - max_example_width/2;
+            context.textAlign = 'left';
+            context.fillText(lines[i], examplePos.x, textPos.y);            
+          }
+        }
 
         if (opts.strokeText) {
           context.strokeText(lines[i], textPos.x, textPos.y);
@@ -274,7 +289,7 @@
       context.textAlign = opts.textAlign;
 
       if (opts.textAlign == 'center') {
-        textPos.x = EL_WIDTH / 2;
+        textPos.x = EL_WIDTH / 2;        
       } else if (opts.textAlign == 'right') {
         textPos.x = EL_WIDTH - opts.paddingX;
       } else {
