@@ -261,6 +261,12 @@
       var max_example_width = 0;
       example_i = lines.indexOf('\u0000B7 ');
       for (var i = 0; i < lines.length; i++) {
+        if(example_i != -1) {          
+          max_example_width = context.measureText(lines[i]).width > max_example_width? context.measureText(lines[i]).width : max_example_width;
+          examplePos.x = EL_WIDTH / 2 - max_example_width/2;
+        }
+      }
+      for (var i = 0; i < lines.length; i++) {
         textPos.y = parseInt(textPos.y) + lineHeight;
         if(example_i == -1) {
           context.fillText(lines[i], textPos.x, textPos.y);
@@ -268,8 +274,6 @@
           if(i < example_i) {
             context.fillText(lines[i], textPos.x, textPos.y);
           } else {
-            max_example_width = context.measureText(lines[i]).width > max_example_width? context.measureText(lines[i]).width : max_example_width;
-            examplePos.x = EL_WIDTH / 2 - max_example_width/2;
             context.textAlign = 'left';
             context.fillText(lines[i], examplePos.x, textPos.y);            
           }
