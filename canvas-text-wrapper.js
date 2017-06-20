@@ -18,8 +18,7 @@
       fitParent: false,
       strokeText: false,
       renderHDPI: true,
-      textDecoration: 'none',
-      withExample: true
+      textDecoration: 'none'
     };
 
     var opts = {};
