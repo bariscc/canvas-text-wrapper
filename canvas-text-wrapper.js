@@ -276,7 +276,10 @@
           if(i < example_i) {
             context.fillText(lines[i], textPos.x, textPos.y);
           } else {
+            context.font = "italic "+context.font;
+            context.fillStyle = "rgba(41, 43, 44, .9)";
             context.textAlign = 'left';
+
             context.fillText(lines[i], examplePos.x, textPos.y);            
           }
         }
