@@ -261,9 +261,11 @@
       var max_example_width = 0;
       example_i = lines.indexOf('\u0000B7 ');
       for (var i = 0; i < lines.length; i++) {
-        if(example_i != -1) {          
-          max_example_width = context.measureText(lines[i]).width > max_example_width? context.measureText(lines[i]).width : max_example_width;
-          examplePos.x = EL_WIDTH / 2 - max_example_width/2;
+        for (var i = 0; i < lines.length; i++) {
+          if(example_i != -1 && i >= example_i) {
+            max_example_width = context.measureText(lines[i]).width > max_example_width? context.measureText(lines[i]).width : max_example_width;
+            examplePos.x = EL_WIDTH / 2 - max_example_width/2;
+          }
         }
       }
       for (var i = 0; i < lines.length; i++) {
